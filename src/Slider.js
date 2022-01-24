@@ -1,14 +1,16 @@
 /* eslint-disable react/style-prop-object */
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, Badge } from "@chakra-ui/react";
 
 const SliderPage = ({ anime }) => {
   return (
-    <Box overflow="hidden" className="container-images" bg="purple" w={256}>
+<>
+{anime.attributes.titles.en ? 
+<Box maxW='sm' overflow='hidden'>
       <Image
         className="images"
-        maxW="sm"
-        maxH="sm"
+        // maxW="sm"
+        // maxH="sm"
         src={anime.attributes.posterImage.large}
         alt={anime.attributes.titles.en}
       />
@@ -20,9 +22,36 @@ const SliderPage = ({ anime }) => {
         isTruncated
         color="white"
       >
-        {anime.attributes.titles.en}
+              <Box p='6'>
+              <Box display='flex' alignItems='baseline'>
+          
+          <Badge borderRadius='full' px='2' colorScheme='teal'  m ={2}>
+          {anime.attributes.startDate.split('-')[0]} 
+          </Badge>
+          
+          <Badge borderRadius='full' px='2' colorScheme='linkedin' m ={2} >
+          
+          {anime.attributes.averageRating}
+          </Badge>
+          
+        </Box>
+
+        <Box
+          mt='1'
+          fontWeight='semibold'
+          as='h4'
+          lineHeight='tight'
+          isTruncated
+
+        >
+         {anime.attributes.titles.en}
+        </Box>
       </Box>
-    </Box>
+
+      </Box>
+    </Box> : '' }
+
+</>  
   );
 };
 

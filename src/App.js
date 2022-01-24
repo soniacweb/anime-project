@@ -9,19 +9,26 @@ function App() {
   useEffect(() => {
     const baseURL = "https://kitsu.io/api/edge/";
     const trendyAnime = `${baseURL}trending/anime`;
-    const anime = `${baseURL}anime`;
+    const anime = `${baseURL}anime?page[limit]=20&page[offset]=0`;
+    const anime2010 = `${baseURL}anime?page[limit]=20&page[offset]=1`
     const promise1 = axios.get(trendyAnime);
     const promise2 = axios.get(anime);
-    Promise.all([promise1, promise2])
+    const promise3 = axios.get(anime2010)
+    Promise.all([promise1, promise2, promise3])
       .then((res) => {
         setTrendyAnime(res[0].data.data);
-        setAnime(res[1].data.data);
+        setAnime(() => {
+          let listAnime = res[1].data.data; 
+          let animelist2010 = res[2].data.data
+          return [ ...listAnime, ...animelist2010 ]
+        })
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
+ 
+console.log(animeReq)
   return (
     <div className="App">
       {/* Nav */}
