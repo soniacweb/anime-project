@@ -28,7 +28,7 @@ const CarouselCard = ({ title, animeList }) => {
       <Text fontSize="5xl" color="white">
         <h1>{title}</h1>
       </Text>
-      <Carousel responsive={responsive} ssr infinite={false}>
+      <Carousel responsive={responsive}>
         {animeList.map((anime, indx) => {
           return <SliderPage anime={anime} key={indx} />;
         })}
